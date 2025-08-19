@@ -1,0 +1,6 @@
+# robots.txt for ClockStore
+# Atualize o domínio abaixo se publicar em outro host
+Sitemap: https://e-commerce-relogios.vercel.app/sitemap.xml
+
+User-agent: *
+Allow: /

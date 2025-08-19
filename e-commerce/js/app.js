@@ -190,6 +190,29 @@ function smoothScrollToId(id){
   window.scrollTo({ top, behavior: 'smooth' });
 }
 
+// ===== Nav (mobile menu) =====
+function initNav(){
+  const btn = document.getElementById('menuToggle');
+  const nav = document.getElementById('primaryNav');
+  if (!btn || !nav) return;
+
+  const close = ()=>{ nav.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); document.body.classList.remove('menu-open'); };
+  const open = ()=>{ nav.classList.add('is-open'); btn.setAttribute('aria-expanded','true'); document.body.classList.add('menu-open'); };
+  const toggle = ()=>{ (nav.classList.contains('is-open') ? close : open)(); };
+
+  btn.addEventListener('click', toggle);
+  // Close on ESC
+  document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') close(); });
+  // Close when clicking a nav link
+  nav.querySelectorAll('a').forEach(a=> a.addEventListener('click', close));
+  // Close on outside click (only if open)
+  document.addEventListener('click', (e)=>{
+    if (!nav.classList.contains('is-open')) return;
+    const t = e.target;
+    if (!(nav.contains(t) || btn.contains(t))) close();
+  });
+}
+
 // ===== Catalog (Home) =====
 function initHome(){
   const grid = $('#productsGrid');
@@ -659,6 +682,7 @@ const Wishlist = {
   // ano no rodapé
   { const y = $('#year'); if (y) y.textContent = new Date().getFullYear(); }
   Cart.renderBadge();
+  initNav();
   initHeroCarousel();
   initHome();
   initCart();

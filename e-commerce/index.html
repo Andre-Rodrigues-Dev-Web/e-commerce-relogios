@@ -12,13 +12,15 @@
   <meta property="og:title" content="ClockStore | Relógios originais com entrega rápida" />
   <meta property="og:description" content="Qualidade, garantia e frete rápido. Até 10% OFF na primeira compra." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="./index.html" />
+  <meta property="og:url" content="https://e-commerce-relogios.vercel.app/index.html" />
   <meta property="og:image" content="https://images.unsplash.com/photo-1617042375876-a13e36732a04?q=80&w=1200&auto=format&fit=crop" />
+  <meta property="og:image:alt" content="Relógio elegante em destaque sobre fundo escuro" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="ClockStore | Relógios originais com entrega rápida" />
   <meta name="twitter:description" content="Qualidade, garantia e frete rápido. Até 10% OFF na primeira compra." />
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1617042375876-a13e36732a04?q=80&w=1200&auto=format&fit=crop" />
-  <link rel="canonical" href="./index.html" />
+  <meta name="twitter:url" content="https://e-commerce-relogios.vercel.app/index.html" />
+  <link rel="canonical" href="https://e-commerce-relogios.vercel.app/index.html" />
   <!-- Preload CSS e imagem hero -->
   <link rel="preload" as="style" href="./styles.css" />
   <link rel="preload" as="image" href="assets/imgs/relogio.png" />
@@ -27,6 +29,25 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+  <!-- CSS crítico mínimo para FCP (header/hero) -->
+  <style>
+    :root{--bg:#0b1220;--text:#111827;--muted:#6b7280;--brand:#111827;--light:#ffffff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji";color:var(--text)}
+    .header{position:sticky;top:0;background:#fff;border-bottom:1px solid #e5e7eb;z-index:50}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .header__content{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+    .logo{font-weight:700;color:var(--text);text-decoration:none}
+    .nav a{color:var(--text);text-decoration:none;margin-left:14px}
+    .hero{background:linear-gradient(180deg,#0b1220 0%,#111827 100%);color:#fff}
+    .hero__content{display:grid;grid-template-columns:1fr;align-items:center;gap:20px;padding:36px 0}
+    .hero__title{font-size:clamp(28px,4vw,42px);line-height:1.1;margin:0 0 8px}
+    .hero__subtitle{margin:0 0 16px;color:#d1d5db}
+    .hero__cta .btn{display:inline-block;margin-right:10px}
+    .hero__visual{text-align:center}
+    .hero__watch{max-width:100%;height:auto;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+    @media(min-width:980px){.hero__content{grid-template-columns:1.1fr .9fr;padding:56px 0}}
+  </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
@@ -39,7 +60,12 @@
         <input id="searchInput" type="search" placeholder="Buscar relógios..." aria-label="Buscar" />
         <button type="submit" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
-      <nav class="nav" aria-label="Navegação principal">
+      <button id="menuToggle" class="menu-toggle" aria-label="Abrir menu" aria-controls="primaryNav" aria-expanded="false">
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+      </button>
+      <nav id="primaryNav" class="nav" aria-label="Navegação principal">
         <a href="./index.html">Home</a>
         <a href="#catalogo" class="hide-sm">Catálogo</a>
         <a class="cart-link" href="./cart.html" aria-label="Ir para o carrinho">
@@ -377,7 +403,7 @@
     "@context": "https://schema.org",
     "@type": "Store",
     "name": "ClockStore",
-    "url": "https://example.com/",
+    "url": "https://e-commerce-relogios.vercel.app/",
     "department": {
       "@type": "DepartmentStore",
       "name": "Relógios"
@@ -395,13 +421,13 @@
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "./index.html"
+        "item": "https://e-commerce-relogios.vercel.app/index.html"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Catálogo",
-        "item": "#catalogo"
+        "item": "https://e-commerce-relogios.vercel.app/index.html#catalogo"
       }
     ]
   }
