@@ -201,6 +201,20 @@ function smoothScrollToId(id){
   if (prevTabIndex === null) el.removeAttribute('tabindex');
 }
 
+// Instant scroll (no animation) with header offset
+function scrollToIdInstant(id){
+  const header = document.querySelector('.header');
+  const offset = (header?.offsetHeight || 0) + 8;
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo(0, top);
+  const prevTabIndex = el.getAttribute('tabindex');
+  if (el.tabIndex < 0) el.setAttribute('tabindex', '-1');
+  el.focus({ preventScroll: true });
+  if (prevTabIndex === null) el.removeAttribute('tabindex');
+}
+
 // ===== Nav (mobile menu) =====
 function initNav(){
   const btn = document.getElementById('menuToggle');
@@ -234,7 +248,6 @@ function initHome(){
   const searchInput = $('#searchInput');
   const heroSearchForm = document.getElementById('heroSearchForm');
   const heroSearchInput = document.getElementById('heroSearchInput');
-  const heroCta = document.querySelector('.hero__cta');
   const filterCategory = $('#filterCategory');
   const sortSelect = $('#sortSelect');
   const paginationEl = $('#catalogPagination');
@@ -379,21 +392,11 @@ function initHome(){
       query = q;
       page = 1;
       render();
-      smoothScrollToId('catalogo');
+      // Jump instantly to catálogo after searching from hero
+      scrollToIdInstant('catalogo');
     });
-    if (heroCta){
-      heroCta.querySelectorAll('a[href^="#"]').forEach((a)=>{
-        a.addEventListener('click', (ev)=>{
-          const href = a.getAttribute('href') || '';
-          if (href.startsWith('#')){
-            ev.preventDefault();
-            smoothScrollToId(href.slice(1));
-          }
-        });
-      });
-    }
-    // Smooth scroll for any direct #catalogo links on the page (e.g., nav/banners)
-    document.querySelectorAll('a[href="#catalogo"]').forEach((a)=>{
+    // Smooth scroll only for menu and footer links to #catalogo
+    document.querySelectorAll('#primaryNav a[href="#catalogo"], footer a[href="#catalogo"]').forEach((a)=>{
       a.addEventListener('click', (ev)=>{ ev.preventDefault(); smoothScrollToId('catalogo'); });
     });
   }
@@ -465,7 +468,7 @@ function initHome(){
       const { total, totalPages, start, visible } = pageInfo;
       if (!paginationEl) return;
       paginationEl.innerHTML = '';
-      const prev = createPageButton('Anterior', Math.max(1, page-1), { disabled: page===1 }, (goto)=>{ page = goto; render(); smoothScrollToId('catalogo'); });
+      const prev = createPageButton('Anterior', Math.max(1, page-1), { disabled: page===1 }, (goto)=>{ page = goto; render(); scrollToIdInstant('catalogo'); });
       paginationEl.appendChild(prev);
 
       const pages = new Set([1, totalPages, page-1, page, page+1].filter(n=> n>=1 && n<=totalPages));
@@ -480,10 +483,10 @@ function initHome(){
           dots.setAttribute('aria-hidden','true');
           paginationEl.appendChild(dots);
         }
-        const btn = createPageButton(current, current, { current: current===page }, (goto)=>{ page = goto; render(); smoothScrollToId('catalogo'); });
+        const btn = createPageButton(current, current, { current: current===page }, (goto)=>{ page = goto; render(); scrollToIdInstant('catalogo'); });
         paginationEl.appendChild(btn);
       }
-      const next = createPageButton('Próximo', Math.min(totalPages, page+1), { disabled: page===totalPages }, (goto)=>{ page = goto; render(); smoothScrollToId('catalogo'); });
+      const next = createPageButton('Próximo', Math.min(totalPages, page+1), { disabled: page===totalPages }, (goto)=>{ page = goto; render(); scrollToIdInstant('catalogo'); });
       paginationEl.appendChild(next);
 
       if (paginationStatus){

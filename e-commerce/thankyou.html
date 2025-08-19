@@ -20,6 +20,23 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+  <header class="header">
+    <div class="container header__content">
+      <a class="logo" href="./index.html">ClockStore</a>
+      <button id="menuToggle" class="menu-toggle" aria-label="Abrir menu" aria-controls="primaryNav" aria-expanded="false">
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+      </button>
+      <nav id="primaryNav" class="nav" aria-label="Navegação principal">
+        <a href="./index.html">Home</a>
+        <a href="./index.html#catalogo" class="hide-sm">Catálogo</a>
+        <a class="cart-link" href="./cart.html" aria-label="Ir para o carrinho">
+          <i class="fa-solid fa-cart-shopping"></i> <span id="cartCount" class="badge">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
   <main class="container section" style="min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
     <h1>Pedido confirmado! <i class="fa-solid fa-circle-check"></i></h1>
     <p>Seu pedido <strong id="orderId">#</strong> foi realizado com sucesso.</p>

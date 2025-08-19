@@ -23,9 +23,17 @@
   <header class="header">
     <div class="container header__content">
       <a class="logo" href="./index.html">ClockStore</a>
-      <nav class="nav">
+      <button id="menuToggle" class="menu-toggle" aria-label="Abrir menu" aria-controls="primaryNav" aria-expanded="false">
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+      </button>
+      <nav id="primaryNav" class="nav" aria-label="Navegação principal">
         <a href="./index.html">Home</a>
-        <a class="cart-link" href="./cart.html"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount" class="badge">0</span></a>
+        <a href="./index.html#catalogo" class="hide-sm">Catálogo</a>
+        <a class="cart-link" href="./cart.html" aria-label="Ir para o carrinho">
+          <i class="fa-solid fa-cart-shopping"></i> <span id="cartCount" class="badge">0</span>
+        </a>
       </nav>
     </div>
   </header>
