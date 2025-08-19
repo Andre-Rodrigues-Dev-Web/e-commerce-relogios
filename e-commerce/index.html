@@ -19,9 +19,14 @@
   <meta name="twitter:description" content="Qualidade, garantia e frete rápido. Até 10% OFF na primeira compra." />
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1617042375876-a13e36732a04?q=80&w=1200&auto=format&fit=crop" />
   <link rel="canonical" href="./index.html" />
+  <!-- Preload CSS e imagem hero -->
+  <link rel="preload" as="style" href="./styles.css" />
+  <link rel="preload" as="image" href="assets/imgs/relogio.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
@@ -62,7 +67,7 @@
           </div>
         </div>
         <div class="hero__visual">
-          <img class="hero__watch" src="https://images.unsplash.com/photo-1617042375876-a13e36732a04?q=80&w=1200&auto=format&fit=crop" alt="Relógio inteligente dourado" loading="eager" fetchpriority="high" decoding="async" />
+          <img class="hero__watch" src="assets/imgs/relogio.png" alt="Relógio inteligente dourado" loading="eager" fetchpriority="high" decoding="async" />
         </div>
       </div>
     </section>
@@ -70,17 +75,17 @@
     <section class="container banners">
       <div class="banners__list">
         <article class="banners__item">
-          <img class="banners__img" src="https://wallpapers.com/images/high/silver-and-gold-rolex-hd-epxsbsnzrj31ikz7.webp" alt="Oferta de clássicos" />
+          <img class="banners__img" src="https://wallpapers.com/images/high/silver-and-gold-rolex-hd-epxsbsnzrj31ikz7.webp" alt="Oferta de clássicos" loading="lazy" decoding="async" />
           <span class="banners__tag">-20% Clássicos</span>
           <a class="banners__cta" href="#catalogo">Ver ofertas</a>
         </article>
         <article class="banners__item">
-          <img class="banners__img" src="https://images.unsplash.com/photo-1526045478516-99145907023c?q=80&w=1400&auto=format&fit=crop" alt="Linha esportiva" />
+          <img class="banners__img" src="https://images.unsplash.com/photo-1526045478516-99145907023c?q=80&w=1400&auto=format&fit=crop" alt="Linha esportiva" loading="lazy" decoding="async" />
           <span class="banners__tag">Novo Esportivo</span>
           <a class="banners__cta" href="#catalogo">Comprar agora</a>
         </article>
         <article class="banners__item">
-          <img class="banners__img" src="https://images.unsplash.com/photo-1511326093442-2771d71c1d65?q=80&w=1400&auto=format&fit=crop" alt="Coleção feminina" />
+          <img class="banners__img" src="https://images.unsplash.com/photo-1511326093442-2771d71c1d65?q=80&w=1400&auto=format&fit=crop" alt="Coleção feminina" loading="lazy" decoding="async" />
           <span class="banners__tag">Femininos</span>
           <a class="banners__cta" href="#catalogo">Descobrir</a>
         </article>
@@ -197,28 +202,28 @@
       </header>
       <div class="grid">
         <a class="cat" href="#catalogo">
-          <img class="cat__img" src="https://images.unsplash.com/photo-1533139502658-0198f920d8ae?q=80&w=400&auto=format&fit=crop" alt="Clássicos" />
+          <img class="cat__img" src="https://images.unsplash.com/photo-1533139502658-0198f920d8ae?q=80&w=400&auto=format&fit=crop" alt="Clássicos" loading="lazy" decoding="async" />
           <div>
             <h3 class="cat__title">Clássicos</h3>
             <p class="text-muted">Elegância atemporal</p>
           </div>
         </a>
         <a class="cat" href="#catalogo">
-          <img class="cat__img" src="https://images.unsplash.com/photo-1526045478516-99145907023c?q=80&w=400&auto=format&fit=crop" alt="Esportivos" />
+          <img class="cat__img" src="https://images.unsplash.com/photo-1526045478516-99145907023c?q=80&w=400&auto=format&fit=crop" alt="Esportivos" loading="lazy" decoding="async" />
           <div>
             <h3 class="cat__title">Esportivos</h3>
             <p class="text-muted">Resistentes e práticos</p>
           </div>
         </a>
         <a class="cat" href="#catalogo">
-          <img class="cat__img" src="https://images.unsplash.com/photo-1511326093442-2771d71c1d65?q=80&w=400&auto=format&fit=crop" alt="Femininos" />
+          <img class="cat__img" src="https://images.unsplash.com/photo-1511326093442-2771d71c1d65?q=80&w=400&auto=format&fit=crop" alt="Femininos" loading="lazy" decoding="async" />
           <div>
             <h3 class="cat__title">Femininos</h3>
             <p class="text-muted">Delicadeza e estilo</p>
           </div>
         </a>
         <a class="cat" href="#catalogo">
-          <img class="cat__img" src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=400&auto=format&fit=crop" alt="Masculinos" />
+          <img class="cat__img" src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=400&auto=format&fit=crop" alt="Masculinos" loading="lazy" decoding="async" />
           <div>
             <h3 class="cat__title">Masculinos</h3>
             <p class="text-muted">Design marcante</p>
@@ -241,21 +246,21 @@
       <div class="testi__list">
         <article class="testi">
           <div class="testi__head">
-            <img class="avatar" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Cliente" />
+            <img class="avatar" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Cliente" loading="lazy" decoding="async" />
             <strong>Marina S.</strong>
           </div>
           <p>Relógio lindo e entrega super rápida. Recomendo!</p>
         </article>
         <article class="testi">
           <div class="testi__head">
-            <img class="avatar" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Cliente" />
+            <img class="avatar" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Cliente" loading="lazy" decoding="async" />
             <strong>Rafael T.</strong>
           </div>
           <p>Ótimo custo-benefício. Atendimento impecável.</p>
         </article>
         <article class="testi">
           <div class="testi__head">
-            <img class="avatar" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Cliente" />
+            <img class="avatar" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Cliente" loading="lazy" decoding="async" />
             <strong>Bianca L.</strong>
           </div>
           <p>Adorei a coleção feminina. Já quero outro!</p>
@@ -277,7 +282,7 @@
           </form>
         </div>
         <div class="newsletter-card__visual" aria-hidden="true">
-          <img class="newsletter__watch" src="assets/imgs/relogio.png" alt="" />
+          <img class="newsletter__watch" src="assets/imgs/relogio.png" alt="" loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
@@ -377,6 +382,28 @@
       "@type": "DepartmentStore",
       "name": "Relógios"
     }
+  }
+  </script>
+
+  <!-- SEO: Breadcrumbs (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "./index.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Catálogo",
+        "item": "#catalogo"
+      }
+    ]
   }
   </script>
 
