@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Obrigado - ClockStore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="container section" style="min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+    <h1>Pedido confirmado! <i class="fa-solid fa-circle-check"></i></h1>
+    <p>Seu pedido <strong id="orderId">#</strong> foi realizado com sucesso.</p>
+    <p>Enviamos os detalhes para o seu e-mail.</p>
+    <a class="btn btn--primary" href="./index.html">Voltar à loja</a>
+  </main>
+  <a class="float-cart" href="./cart.html" aria-label="Abrir carrinho">
+    <i class="fa-solid fa-cart-shopping"></i> Carrinho <span id="cartFloatCount" class="badge">0</span>
+  </a>
+
+  <footer class="footer">
+    <div class="container footer__content">
+      <div class="footer__cols">
+        <div>
+          <h4>ClockStore</h4>
+          <p>Seu tempo com mais estilo. Qualidade, garantia e entrega rápida.</p>
+          <div class="social">
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Navegação</h4>
+          <a href="./index.html">Home</a><br />
+          <a href="./index.html#catalogo">Catálogo</a><br />
+          <nav class="nav">
+            <a class="cart-link" href="./cart.html"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount" class="badge">0</span></a>
+          </nav>
+        </div>
+        <div>
+          <h4>Ajuda</h4>
+          <a href="#">Trocas e Devoluções</a><br />
+          <a href="#">Entrega</a><br />
+          <a href="#">Garantia</a>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <a href="mailto:suporte@clockstore.com">suporte@clockstore.com</a><br />
+          <a href="tel:+5511999999999">(11) 99999-9999</a>
+        </div>
+      </div>
+    </div>
+    <p class="copy">© <span id="year"></span> ClockStore. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="./js/app.js" defer></script>
+</body>
+</html>

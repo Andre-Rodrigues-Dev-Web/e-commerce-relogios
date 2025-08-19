@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrinho - ClockStore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__content">
+      <a class="logo" href="./index.html">ClockStore</a>
+      <nav class="nav">
+        <a href="./index.html">Home</a>
+        <a class="cart-link" href="./cart.html"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount" class="badge">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container section">
+    <h1>Seu carrinho</h1>
+    <div id="cartEmpty" class="alert" hidden>Seu carrinho está vazio.</div>
+    <div id="cartTableWrap" class="cart" hidden>
+      <table class="cart__table">
+        <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Preço</th>
+          <th>Qtd</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody id="cartBody"></tbody>
+      </table>
+      <aside class="cart__summary">
+        <form id="cartCouponForm" class="summary__row" style="gap:8px; align-items:center">
+          <input id="cartCoupon" placeholder="Cupom de desconto" style="flex:1; border:1px solid var(--border); border-radius:10px; padding:8px" />
+          <button class="btn btn--primary" type="submit">Aplicar</button>
+        </form>
+        <div class="summary__row"><span>Itens</span><strong id="sumItems">0</strong></div>
+        <div class="summary__row"><span>Subtotal</span><strong id="sumSubtotal">R$ 0,00</strong></div>
+        <div class="summary__row"><span>Desconto</span><strong id="sumDiscount">- R$ 0,00</strong></div>
+        <div class="summary__row"><span>Frete</span><strong id="sumShipping">R$ 0,00</strong></div>
+        <hr />
+        <div class="summary__row"><span>Total</span><strong id="sumTotal">R$ 0,00</strong></div>
+        <a class="btn btn--primary btn--block" href="./checkout.html">Ir para o checkout</a>
+      </aside>
+    </div>
+  </main>
+
+  <a class="float-cart" href="./cart.html" aria-label="Abrir carrinho">
+    <i class="fa-solid fa-cart-shopping"></i> Carrinho <span id="cartFloatCount" class="badge">0</span>
+  </a>
+
+  <footer class="footer">
+    <div class="container footer__content">
+      <div class="footer__cols">
+        <div>
+          <h4>ClockStore</h4>
+          <p>Seu tempo com mais estilo. Qualidade, garantia e entrega rápida.</p>
+          <div class="social">
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Navegação</h4>
+          <a href="./index.html">Home</a><br />
+          <a href="./index.html#catalogo">Catálogo</a><br />
+          <a href="./cart.html">Carrinho</a>
+        </div>
+        <div>
+          <h4>Ajuda</h4>
+          <a href="#">Trocas e Devoluções</a><br />
+          <a href="#">Entrega</a><br />
+          <a href="#">Garantia</a>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <a href="mailto:suporte@clockstore.com">suporte@clockstore.com</a><br />
+          <a href="tel:+5511999999999">(11) 99999-9999</a>
+        </div>
+      </div>
+    </div>
+    <p class="copy">© <span id="year"></span> ClockStore. Todos os direitos reservados.</p>
+  </footer>
+
+  <template id="cartRowTpl">
+    <tr>
+      <td class="cart__prod">
+        <img class="cart__img" alt="" />
+        <div>
+          <div class="cart__title"></div>
+          <div class="cart__brand text-muted"></div>
+        </div>
+      </td>
+      <td class="cart__price"></td>
+      <td>
+        <div class="qty">
+          <button class="qty__btn" data-act="dec" aria-label="Diminuir quantidade"><i class="fa-solid fa-minus"></i></button>
+          <input class="qty__input" type="number" min="1" />
+          <button class="qty__btn" data-act="inc" aria-label="Aumentar quantidade"><i class="fa-solid fa-plus"></i></button>
+        </div>
+      </td>
+      <td class="cart__subtotal"></td>
+      <td><button class="link danger remove">Remover</button></td>
+    </tr>
+  </template>
+
+  <script src="./js/app.js" defer></script>
+</body>
+</html>

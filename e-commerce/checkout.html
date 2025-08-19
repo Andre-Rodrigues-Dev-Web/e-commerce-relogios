@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout - ClockStore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__content">
+      <a class="logo" href="./index.html">ClockStore</a>
+      <nav class="nav">
+        <a href="./index.html">Home</a>
+        <a class="cart-link" href="./cart.html"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount" class="badge">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container section">
+    <h1>Checkout</h1>
+    <div id="checkoutEmpty" class="alert" hidden>Seu carrinho está vazio.</div>
+
+    <form id="checkoutForm" class="checkout" novalidate>
+      <section class="checkout__section">
+        <h2>Dados pessoais</h2>
+        <div class="grid grid--2">
+          <label>Nome completo
+            <input name="fullName" required />
+          </label>
+          <label>Email
+            <input type="email" name="email" required />
+          </label>
+        </div>
+        <div class="grid grid--2">
+          <label>Telefone
+            <input name="phone" required />
+          </label>
+          <label>CPF
+            <input name="cpf" required />
+          </label>
+        </div>
+      </section>
+
+      <section class="checkout__section">
+        <h2>Endereço</h2>
+        <label>CEP
+          <input name="cep" required />
+        </label>
+        <label>Endereço
+          <input name="address" required />
+        </label>
+        <div class="grid grid--3">
+          <label>Número
+            <input name="number" required />
+          </label>
+          <label>Complemento
+            <input name="complement" />
+          </label>
+          <label>Bairro
+            <input name="district" required />
+          </label>
+        </div>
+        <div class="grid grid--2">
+          <label>Cidade
+            <input name="city" required />
+          </label>
+          <label>Estado
+            <input name="state" required />
+          </label>
+        </div>
+      </section>
+
+      <section class="checkout__section">
+        <h2>Pagamento</h2>
+        <label>Nome no cartão
+          <input name="cardName" required />
+        </label>
+        <div class="grid grid--3">
+          <label>Número do cartão
+            <input name="cardNumber" required minlength="15" maxlength="19" />
+          </label>
+          <label>Validade (MM/AA)
+            <input name="cardExpiry" required placeholder="MM/AA" />
+          </label>
+          <label>CVV
+            <input name="cardCvv" required minlength="3" maxlength="4" />
+          </label>
+        </div>
+      </section>
+
+      <aside class="checkout__summary">
+        <form id="coCouponForm" class="summary__row" style="gap:8px; align-items:center">
+          <input id="coCoupon" placeholder="Cupom de desconto" style="flex:1; border:1px solid var(--border); border-radius:10px; padding:8px" />
+          <button class="btn btn--primary" type="submit">Aplicar</button>
+        </form>
+        <div class="summary__row"><span>Itens</span><strong id="coItems">0</strong></div>
+        <div class="summary__row"><span>Subtotal</span><strong id="coSubtotal">R$ 0,00</strong></div>
+        <div class="summary__row"><span>Desconto</span><strong id="coDiscount">- R$ 0,00</strong></div>
+        <div class="summary__row"><span>Frete</span><strong id="coShipping">R$ 0,00</strong></div>
+        <hr />
+        <div class="summary__row"><span>Total</span><strong id="coTotal">R$ 0,00</strong></div>
+        <button class="btn btn--primary btn--block" type="submit">Finalizar pedido</button>
+      </aside>
+    </form>
+  </main>
+
+  <a class="float-cart" href="./cart.html" aria-label="Abrir carrinho">
+    <i class="fa-solid fa-cart-shopping"></i> Carrinho <span id="cartFloatCount" class="badge">0</span>
+  </a>
+
+  <footer class="footer">
+    <div class="container footer__content">
+      <div class="footer__cols">
+        <div>
+          <h4>ClockStore</h4>
+          <p>Seu tempo com mais estilo. Qualidade, garantia e entrega rápida.</p>
+          <div class="social">
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Navegação</h4>
+          <a href="./index.html">Home</a><br />
+          <a href="./index.html#catalogo">Catálogo</a><br />
+          <a href="./cart.html">Carrinho</a>
+        </div>
+        <div>
+          <h4>Ajuda</h4>
+          <a href="#">Trocas e Devoluções</a><br />
+          <a href="#">Entrega</a><br />
+          <a href="#">Garantia</a>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <a href="mailto:suporte@clockstore.com">suporte@clockstore.com</a><br />
+          <a href="tel:+5511999999999">(11) 99999-9999</a>
+        </div>
+      </div>
+    </div>
+    <p class="copy">© <span id="year"></span> ClockStore. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="./js/app.js" defer></script>
+</body>
+</html>

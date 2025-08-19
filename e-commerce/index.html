@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ClockStore | Relógios originais com entrega rápida e ofertas imperdíveis</title>
+  <meta name="description" content="Relógios masculinos, femininos e esportivos com qualidade, garantia e frete rápido. Até 10% OFF no primeiro pedido. Pague em até 6x sem juros." />
+  <meta name="keywords" content="relógios, relógios masculinos, relógios femininos, relógios esportivos, comprar relógio online, ofertas relógios" />
+  <meta name="author" content="André Laurentino Rodrigues" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#111827" />
+  <meta property="og:title" content="ClockStore | Relógios originais com entrega rápida" />
+  <meta property="og:description" content="Qualidade, garantia e frete rápido. Até 10% OFF na primeira compra." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="./index.html" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1617042375876-a13e36732a04?q=80&w=1200&auto=format&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ClockStore | Relógios originais com entrega rápida" />
+  <meta name="twitter:description" content="Qualidade, garantia e frete rápido. Até 10% OFF na primeira compra." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1617042375876-a13e36732a04?q=80&w=1200&auto=format&fit=crop" />
+  <link rel="canonical" href="./index.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__content">
+      <a class="logo" href="./index.html">ClockStore</a>
+      <form id="searchForm" class="search">
+        <input id="searchInput" type="search" placeholder="Buscar relógios..." aria-label="Buscar" />
+        <button type="submit" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="./index.html">Home</a>
+        <a href="#catalogo" class="hide-sm">Catálogo</a>
+        <a class="cart-link" href="./cart.html" aria-label="Ir para o carrinho">
+          <i class="fa-solid fa-cart-shopping"></i> <span id="cartCount" class="badge">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--dark">
+      <div class="container hero__content hero__content--split">
+        <div class="hero__copy">
+          <h1 class="hero__title">Descubra os relógios<br/>mais adequados</h1>
+          <p class="hero__subtitle">Os melhores, mais confiáveis e com preço justo. Qualidade garantida e envio rápido. Encontre o relógio perfeito entre diversas marcas.</p>
+          <form id="heroSearchForm" class="hero-search" role="search" aria-label="Buscar marcas e modelos">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <label for="heroSearchInput" class="sr-only">Buscar no catálogo</label>
+            <input id="heroSearchInput" type="search" placeholder="Encontre as melhores marcas" />
+            <button class="btn btn--primary" type="submit">Buscar</button>
+          </form>
+          <div class="hero__cta" aria-label="Ações rápidas">
+            <a class="btn btn--primary" href="#catalogo">Explorar catálogo</a>
+            <a class="btn btn--ghost-light" href="#catalogo">Ver clássicos</a>
+          </div>
+        </div>
+        <div class="hero__visual">
+          <img class="hero__watch" src="https://images.unsplash.com/photo-1617042375876-a13e36732a04?q=80&w=1200&auto=format&fit=crop" alt="Relógio inteligente dourado" loading="eager" fetchpriority="high" decoding="async" />
+        </div>
+      </div>
+    </section>
+
+    <section class="container banners">
+      <div class="banners__list">
+        <article class="banners__item">
+          <img class="banners__img" src="https://wallpapers.com/images/high/silver-and-gold-rolex-hd-epxsbsnzrj31ikz7.webp" alt="Oferta de clássicos" />
+          <span class="banners__tag">-20% Clássicos</span>
+          <a class="banners__cta" href="#catalogo">Ver ofertas</a>
+        </article>
+        <article class="banners__item">
+          <img class="banners__img" src="https://images.unsplash.com/photo-1526045478516-99145907023c?q=80&w=1400&auto=format&fit=crop" alt="Linha esportiva" />
+          <span class="banners__tag">Novo Esportivo</span>
+          <a class="banners__cta" href="#catalogo">Comprar agora</a>
+        </article>
+        <article class="banners__item">
+          <img class="banners__img" src="https://images.unsplash.com/photo-1511326093442-2771d71c1d65?q=80&w=1400&auto=format&fit=crop" alt="Coleção feminina" />
+          <span class="banners__tag">Femininos</span>
+          <a class="banners__cta" href="#catalogo">Descobrir</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="catalogo" class="container section">
+      <header class="section__header">
+        <h2>Catálogo</h2>
+        <fieldset class="filters">
+          <legend class="sr-only">Filtros do catálogo</legend>
+          <label for="sortSelect" class="sr-only">Ordenar catálogo</label>
+          <select id="sortSelect" class="select" aria-label="Ordenar catálogo">
+            <option value="">Ordenar</option>
+            <option value="price-asc">Preço: menor para maior</option>
+            <option value="price-desc">Preço: maior para menor</option>
+            <option value="name-asc">Nome: A-Z</option>
+            <option value="name-desc">Nome: Z-A</option>
+          </select>
+
+          <label for="pageSizeSelect" class="sr-only">Itens por página</label>
+          <select id="pageSizeSelect" class="select" aria-label="Itens por página">
+            <option value="12" selected>12 por página</option>
+            <option value="16">16 por página</option>
+            <option value="20">20 por página</option>
+          </select>
+        </fieldset>
+      </header>
+      <div class="catalog">
+        <aside class="catalog__sidebar">
+          <form id="sideFilters" class="side-filters" aria-label="Filtros avançados">
+            <div class="filter-group">
+              <label for="filterCategory">Categoria</label>
+              <select id="filterCategory" class="select">
+                <option value="">Todas</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+                <option value="esportivo">Esportivo</option>
+                <option value="clássico">Clássico</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <span class="filter-label">Marca</span>
+              <div class="checks">
+                <label><input type="checkbox" name="brand" value="Zenith" /> Zenith</label>
+                <label><input type="checkbox" name="brand" value="Aurora" /> Aurora</label>
+                <label><input type="checkbox" name="brand" value="Vector" /> Vector</label>
+                <label><input type="checkbox" name="brand" value="Royal" /> Royal</label>
+                <label><input type="checkbox" name="brand" value="Metro" /> Metro</label>
+                <label><input type="checkbox" name="brand" value="Fleur" /> Fleur</label>
+                <label><input type="checkbox" name="brand" value="Pulse" /> Pulse</label>
+                <label><input type="checkbox" name="brand" value="Heritage" /> Heritage</label>
+                <label><input type="checkbox" name="brand" value="Mariner" /> Mariner</label>
+                <label><input type="checkbox" name="brand" value="Mono" /> Mono</label>
+                <label><input type="checkbox" name="brand" value="Eden" /> Eden</label>
+                <label><input type="checkbox" name="brand" value="Era" /> Era</label>
+                <label><input type="checkbox" name="brand" value="Hike" /> Hike</label>
+                <label><input type="checkbox" name="brand" value="Prime" /> Prime</label>
+                <label><input type="checkbox" name="brand" value="Charm" /> Charm</label>
+              </div>
+            </div>
+            <div class="filter-group">
+              <span class="filter-label">Preço</span>
+              <div class="row-2">
+                <input id="priceMin" type="number" min="0" step="10" placeholder="Mín" />
+                <input id="priceMax" type="number" min="0" step="10" placeholder="Máx" />
+              </div>
+            </div>
+            <div class="filter-group">
+              <label for="minRating">Avaliação mínima</label>
+              <select id="minRating" class="select">
+                <option value="">Qualquer</option>
+                <option value="4">4.0+</option>
+                <option value="4.5">4.5+</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="tagSelect">Tag</label>
+              <select id="tagSelect" class="select">
+                <option value="">Todas</option>
+                <option>Novo</option>
+                <option>Top</option>
+                <option>Promo</option>
+                <option>Luxo</option>
+                <option>Vintage</option>
+                <option>Verão</option>
+                <option>Minimal</option>
+                <option>Brilho</option>
+                <option>Retro</option>
+                <option>Aventura</option>
+                <option>Leve</option>
+                <option>Esportivo</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label class="filter-inline"><input type="checkbox" id="freeShip" /> Frete grátis</label>
+            </div>
+            <div class="filter-group">
+              <label class="filter-inline"><input type="checkbox" id="favoritesOnly" /> Somente favoritos</label>
+            </div>
+          </form>
+        </aside>
+        <div class="catalog__main">
+          <div id="productsGrid" class="grid"></div>
+          <nav id="catalogPagination" class="pagination" aria-label="Paginação do catálogo"></nav>
+          <div id="paginationStatus" class="sr-only" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section cats">
+      <header class="section__header">
+        <h2>Categorias em destaque</h2>
+      </header>
+      <div class="grid">
+        <a class="cat" href="#catalogo">
+          <img class="cat__img" src="https://images.unsplash.com/photo-1533139502658-0198f920d8ae?q=80&w=400&auto=format&fit=crop" alt="Clássicos" />
+          <div>
+            <h3 class="cat__title">Clássicos</h3>
+            <p class="text-muted">Elegância atemporal</p>
+          </div>
+        </a>
+        <a class="cat" href="#catalogo">
+          <img class="cat__img" src="https://images.unsplash.com/photo-1526045478516-99145907023c?q=80&w=400&auto=format&fit=crop" alt="Esportivos" />
+          <div>
+            <h3 class="cat__title">Esportivos</h3>
+            <p class="text-muted">Resistentes e práticos</p>
+          </div>
+        </a>
+        <a class="cat" href="#catalogo">
+          <img class="cat__img" src="https://images.unsplash.com/photo-1511326093442-2771d71c1d65?q=80&w=400&auto=format&fit=crop" alt="Femininos" />
+          <div>
+            <h3 class="cat__title">Femininos</h3>
+            <p class="text-muted">Delicadeza e estilo</p>
+          </div>
+        </a>
+        <a class="cat" href="#catalogo">
+          <img class="cat__img" src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=400&auto=format&fit=crop" alt="Masculinos" />
+          <div>
+            <h3 class="cat__title">Masculinos</h3>
+            <p class="text-muted">Design marcante</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="container section usp">
+      <div class="usp__item"><i class="fa-solid fa-truck-fast"></i> Frete rápido</div>
+      <div class="usp__item"><i class="fa-solid fa-lock"></i> Pagamento seguro</div>
+      <div class="usp__item"><i class="fa-solid fa-comments"></i> Suporte 24/7</div>
+      <div class="usp__item"><i class="fa-solid fa-rotate-left"></i> 7 dias para trocar</div>
+    </section>
+
+    <section class="container section">
+      <header class="section__header">
+        <h2>O que dizem nossos clientes</h2>
+      </header>
+      <div class="testi__list">
+        <article class="testi">
+          <div class="testi__head">
+            <img class="avatar" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Cliente" />
+            <strong>Marina S.</strong>
+          </div>
+          <p>Relógio lindo e entrega super rápida. Recomendo!</p>
+        </article>
+        <article class="testi">
+          <div class="testi__head">
+            <img class="avatar" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Cliente" />
+            <strong>Rafael T.</strong>
+          </div>
+          <p>Ótimo custo-benefício. Atendimento impecável.</p>
+        </article>
+        <article class="testi">
+          <div class="testi__head">
+            <img class="avatar" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="Cliente" />
+            <strong>Bianca L.</strong>
+          </div>
+          <p>Adorei a coleção feminina. Já quero outro!</p>
+        </article>
+      </div>
+    </section>
+    
+    <section class="container section">
+      <div class="newsletter-card">
+        <div class="newsletter-card__copy">
+          <h2 class="newsletter-card__title">Assine nossa newsletter</h2>
+          <p class="newsletter-card__subtitle">Receba ofertas exclusivas e promoções especiais.</p>
+          <form id="newsletterForm" class="newsletter-card__form" novalidate>
+            <label class="sr-only" for="newsletterEmail">E-mail</label>
+            <div class="input-group">
+              <input id="newsletterEmail" type="email" name="email" placeholder="Digite seu e-mail" required />
+              <button class="btn btn--primary" type="submit">Assinar</button>
+            </div>
+          </form>
+        </div>
+        <div class="newsletter-card__visual" aria-hidden="true">
+          <img class="newsletter__watch" src="assets/imgs/relogio.png" alt="" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="float-cart" href="./cart.html" aria-label="Abrir carrinho">
+    <i class="fa-solid fa-cart-shopping"></i> Carrinho <span id="cartFloatCount" class="badge">0</span>
+  </a>
+
+  <footer class="footer">
+    <div class="container footer__content">
+      <div class="footer__cols">
+        <div>
+          <h4>ClockStore</h4>
+          <p>Seu tempo com mais estilo. Qualidade, garantia e entrega rápida.</p>
+          <div class="social">
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Navegação</h4>
+          <a href="./index.html">Home</a><br />
+          <a href="#catalogo">Catálogo</a><br />
+          <a href="./cart.html">Carrinho</a>
+        </div>
+        <div>
+          <h4>Ajuda</h4>
+          <a href="#">Trocas e Devoluções</a><br />
+          <a href="#">Entrega</a><br />
+          <a href="#">Garantia</a>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <a href="mailto:suporte@clockstore.com">suporte@clockstore.com</a><br />
+          <a href="tel:+5511999999999">(11) 99999-9999</a>
+        </div>
+      </div>
+    </div>
+    <p class="copy">© <span id="year"></span> ClockStore. Todos os direitos reservados. Desenvolvido por <strong>André Laurentino Rodrigues</strong>.</p>
+  </footer>
+
+  <template id="productCardTpl">
+    <article class="card card--modern">
+      <div class="card__imgwrap">
+        <img class="card__img" alt="Relógio de pulso" loading="lazy" decoding="async" fetchpriority="low" />
+        <span class="chip"></span>
+        <span class="chip chip--tl chip--free" hidden>Frete grátis</span>
+        <div class="card__fabs" aria-label="Ações do produto">
+          <button class="fab fab--cart" aria-label="Adicionar ao carrinho"><i class="fa-solid fa-cart-plus"></i></button>
+          <button class="fab fab--wish" aria-label="Adicionar à lista de desejos" aria-pressed="false"><i class="fa-solid fa-heart"></i></button>
+        </div>
+      </div>
+      <h3 class="card__title"></h3>
+      <div class="card__rating" aria-label="Avaliação do produto"></div>
+      <div class="card__price">
+        <span class="price-old" hidden></span>
+        <span class="price-new"></span>
+      </div>
+    </article>
+  </template>
+
+  <!-- Modal de detalhes do produto -->
+  <dialog id="detailsModal" class="modal" aria-labelledby="mdTitle">
+    <div class="modal__content">
+      <button class="modal__close" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal__body">
+        <img id="mdImg" alt="Relógio de pulso" class="modal__img" loading="lazy" decoding="async" fetchpriority="low" />
+        <div class="modal__info">
+          <h3 id="mdTitle">Detalhes do produto</h3>
+          <p id="mdBrand" class="text-muted"></p>
+          <div id="mdRating" class="card__rating"></div>
+          <div id="mdPrice" class="card__price" style="margin:8px 0 16px"></div>
+          <ul class="modal__bullets">
+            <li>Design premium com acabamento impecável</li>
+            <li>Garantia de 12 meses e suporte dedicado</li>
+            <li>Entrega rápida para todo o Brasil</li>
+          </ul>
+          <div class="modal__actions">
+            <button id="mdBuy" class="btn btn--primary"><i class="fa-solid fa-cart-plus"></i> Comprar agora</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- SEO: Lista de produtos (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "ClockStore",
+    "url": "https://example.com/",
+    "department": {
+      "@type": "DepartmentStore",
+      "name": "Relógios"
+    }
+  }
+  </script>
+
+  <script src="./js/app.js" defer></script>
+</body>
+</html>
