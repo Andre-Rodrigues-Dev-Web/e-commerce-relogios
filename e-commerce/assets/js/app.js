@@ -180,14 +180,25 @@ const Cart = {
   }
 };
 
-// Smooth scroll with header offset
+// Smooth scroll with header offset (respects prefers-reduced-motion) and focuses target
 function smoothScrollToId(id){
   const header = document.querySelector('.header');
   const offset = (header?.offsetHeight || 0) + 8; // small breathing space
   const el = document.getElementById(id);
   if (!el) return;
   const top = el.getBoundingClientRect().top + window.scrollY - offset;
-  window.scrollTo({ top, behavior: 'smooth' });
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+  if (reduce){
+    window.scrollTo(0, top);
+  } else {
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+  // Ensure focus for keyboard/screen reader users
+  const prevTabIndex = el.getAttribute('tabindex');
+  if (el.tabIndex < 0) el.setAttribute('tabindex', '-1');
+  el.focus({ preventScroll: true });
+  // Restore tabindex if it wasn't present
+  if (prevTabIndex === null) el.removeAttribute('tabindex');
 }
 
 // ===== Nav (mobile menu) =====
@@ -280,6 +291,113 @@ function initHome(){
   let pageSize = Number(localStorage.getItem('clockstore_page_size') || (pageSizeSelect?.value) || 12) || 12;
   if (pageSizeSelect) pageSizeSelect.value = String(pageSize);
 
+  // Extracted: JSON-LD update for product list (reduces initHome complexity)
+  function updateJsonLd(list){
+    try{
+      const base = (document.querySelector('link[rel="canonical"]')?.href) || (location.origin + location.pathname);
+      const elId = 'productsJsonLd';
+      { const prev = document.getElementById(elId); if (prev) prev.remove(); }
+      const itemList = list.map((p)=>{
+        const r = getRatingForProduct(p);
+        return {
+          '@type':'Product',
+          name: p.name,
+          image: getImageForProduct(p),
+          url: `${base}#p-${p.id}`,
+          brand: { '@type':'Brand', name: p.brand },
+          category: p.category,
+          offers: { '@type':'Offer', priceCurrency:'BRL', price: p.price, availability: 'https://schema.org/InStock' },
+          aggregateRating: { '@type':'AggregateRating', ratingValue: r.rating, reviewCount: r.count }
+        };
+      });
+      const json = {
+        '@context':'https://schema.org',
+        '@type':'ItemList',
+        itemListElement: itemList.map((prod, i)=>({ '@type':'ListItem', position: i+1, item: prod }))
+      };
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.id = elId;
+      s.textContent = JSON.stringify(json);
+      document.head.appendChild(s);
+
+      const elId2 = 'productsJsonLdItems';
+      { const prev2 = document.getElementById(elId2); if (prev2) prev2.remove(); }
+      const products = list.map((p)=>{
+        const r = getRatingForProduct(p);
+        return {
+          '@context':'https://schema.org',
+          '@type':'Product',
+          name: p.name,
+          image: getImageForProduct(p),
+          url: `${base}#p-${p.id}`,
+          brand: { '@type':'Brand', name: p.brand },
+          category: p.category,
+          offers: { '@type':'Offer', priceCurrency:'BRL', price: p.price, availability: 'https://schema.org/InStock' },
+          aggregateRating: { '@type':'AggregateRating', ratingValue: r.rating, reviewCount: r.count }
+        };
+      });
+      const s2 = document.createElement('script');
+      s2.type = 'application/ld+json';
+      s2.id = elId2;
+      s2.textContent = JSON.stringify(products);
+      document.head.appendChild(s2);
+    }catch{}
+  }
+
+  // Extracted: all event listener bindings (reduces initHome complexity)
+  function attachCatalogListeners(){
+    if (searchForm) searchForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      query = (searchInput?.value||'').trim().toLowerCase();
+      page = 1;
+      render();
+    });
+    if (filterCategory) filterCategory.addEventListener('change', (e)=>{ category = e.target.value; page = 1; render(); });
+    if (sortSelect) sortSelect.addEventListener('change', (e)=>{ sort = e.target.value; page = 1; render(); });
+    if (favoritesOnly) favoritesOnly.addEventListener('change', (e)=>{ onlyFav = !!e.target.checked; page = 1; render(); });
+    // Sidebar listeners
+    if (brandChecks.length){
+      const syncBrands = ()=>{ selBrands = new Set(brandChecks.filter(ch=>ch.checked).map(ch=>ch.value)); page = 1; render(); };
+      brandChecks.forEach(ch=> ch.addEventListener('change', syncBrands));
+    }
+    if (priceMinEl) priceMinEl.addEventListener('input', ()=>{ const v = Number(priceMinEl.value); priceMin = Number.isFinite(v) && v>=0 ? v : null; page=1; render(); });
+    if (priceMaxEl) priceMaxEl.addEventListener('input', ()=>{ const v = Number(priceMaxEl.value); priceMax = Number.isFinite(v) && v>=0 ? v : null; page=1; render(); });
+    if (minRatingEl) minRatingEl.addEventListener('change', (e)=>{ const v = Number(e.target.value); minRating = Number.isFinite(v) && v>0 ? v : null; page=1; render(); });
+    if (tagSelect) tagSelect.addEventListener('change', (e)=>{ selTag = e.target.value || ''; page=1; render(); });
+    if (freeShipEl) freeShipEl.addEventListener('change', (e)=>{ onlyFree = !!e.target.checked; page=1; render(); });
+    if (pageSizeSelect) pageSizeSelect.addEventListener('change', (e)=>{ 
+      pageSize = Math.max(1, Number(e.target.value)||12); 
+      localStorage.setItem('clockstore_page_size', String(pageSize));
+      page = 1; 
+      render(); 
+    });
+    if (heroSearchForm) heroSearchForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const q = (heroSearchInput?.value||'').trim().toLowerCase();
+      if (searchInput) searchInput.value = q;
+      query = q;
+      page = 1;
+      render();
+      smoothScrollToId('catalogo');
+    });
+    if (heroCta){
+      heroCta.querySelectorAll('a[href^="#"]').forEach((a)=>{
+        a.addEventListener('click', (ev)=>{
+          const href = a.getAttribute('href') || '';
+          if (href.startsWith('#')){
+            ev.preventDefault();
+            smoothScrollToId(href.slice(1));
+          }
+        });
+      });
+    }
+    // Smooth scroll for any direct #catalogo links on the page (e.g., nav/banners)
+    document.querySelectorAll('a[href="#catalogo"]').forEach((a)=>{
+      a.addEventListener('click', (ev)=>{ ev.preventDefault(); smoothScrollToId('catalogo'); });
+    });
+  }
+
   function render(){
     grid.innerHTML = '';
     
@@ -303,6 +421,10 @@ function initHome(){
         const rating = $('.card__rating', node);
         const priceOld = $('.price-old', node);
         const priceNew = $('.price-new', node);
+        // Ensure optimal loading hints (defensive in case template changes)
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        try { img.fetchPriority = 'low'; } catch {}
         img.src = getImageForProduct(p);
         img.alt = p.name;
         chip.textContent = p.tag || '';
@@ -377,109 +499,10 @@ function initHome(){
     page = pageInfo.page;
     renderProducts(pageInfo.visible);
     renderPaginationControls(pageInfo);
-
-    // JSON-LD for current list
-    try{
-      const base = (document.querySelector('link[rel="canonical"]')?.href) || (location.origin + location.pathname);
-      const elId = 'productsJsonLd';
-      { const prev = document.getElementById(elId); if (prev) prev.remove(); }
-      const itemList = list.map((p)=>{
-        const r = getRatingForProduct(p);
-        return {
-          '@type':'Product',
-          name: p.name,
-          image: getImageForProduct(p),
-          url: `${base}#p-${p.id}`,
-          brand: { '@type':'Brand', name: p.brand },
-          category: p.category,
-          offers: { '@type':'Offer', priceCurrency:'BRL', price: p.price, availability: 'https://schema.org/InStock' },
-          aggregateRating: { '@type':'AggregateRating', ratingValue: r.rating, reviewCount: r.count }
-        };
-      });
-      const json = {
-        '@context':'https://schema.org',
-        '@type':'ItemList',
-        itemListElement: itemList.map((prod, i)=>({ '@type':'ListItem', position: i+1, item: prod }))
-      };
-      const s = document.createElement('script');
-      s.type = 'application/ld+json';
-      s.id = elId;
-      s.textContent = JSON.stringify(json);
-      document.head.appendChild(s);
-
-      const elId2 = 'productsJsonLdItems';
-      { const prev2 = document.getElementById(elId2); if (prev2) prev2.remove(); }
-      const products = list.map((p)=>{
-        const r = getRatingForProduct(p);
-        return {
-          '@context':'https://schema.org',
-          '@type':'Product',
-          name: p.name,
-          image: getImageForProduct(p),
-          url: `${base}#p-${p.id}`,
-          brand: { '@type':'Brand', name: p.brand },
-          category: p.category,
-          offers: { '@type':'Offer', priceCurrency:'BRL', price: p.price, availability: 'https://schema.org/InStock' },
-          aggregateRating: { '@type':'AggregateRating', ratingValue: r.rating, reviewCount: r.count }
-        };
-      });
-      const s2 = document.createElement('script');
-      s2.type = 'application/ld+json';
-      s2.id = elId2;
-      s2.textContent = JSON.stringify(products);
-      document.head.appendChild(s2);
-    }catch{}
+    updateJsonLd(list);
   }
 
-  if (searchForm) searchForm.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    query = (searchInput?.value||'').trim().toLowerCase();
-    page = 1;
-    render();
-  });
-  if (filterCategory) filterCategory.addEventListener('change', (e)=>{ category = e.target.value; page = 1; render(); });
-  if (sortSelect) sortSelect.addEventListener('change', (e)=>{ sort = e.target.value; page = 1; render(); });
-  if (favoritesOnly) favoritesOnly.addEventListener('change', (e)=>{ onlyFav = !!e.target.checked; page = 1; render(); });
-  // Sidebar listeners
-  if (brandChecks.length){
-    const syncBrands = ()=>{ selBrands = new Set(brandChecks.filter(ch=>ch.checked).map(ch=>ch.value)); page = 1; render(); };
-    brandChecks.forEach(ch=> ch.addEventListener('change', syncBrands));
-  }
-  if (priceMinEl) priceMinEl.addEventListener('input', ()=>{ const v = Number(priceMinEl.value); priceMin = Number.isFinite(v) && v>=0 ? v : null; page=1; render(); });
-  if (priceMaxEl) priceMaxEl.addEventListener('input', ()=>{ const v = Number(priceMaxEl.value); priceMax = Number.isFinite(v) && v>=0 ? v : null; page=1; render(); });
-  if (minRatingEl) minRatingEl.addEventListener('change', (e)=>{ const v = Number(e.target.value); minRating = Number.isFinite(v) && v>0 ? v : null; page=1; render(); });
-  if (tagSelect) tagSelect.addEventListener('change', (e)=>{ selTag = e.target.value || ''; page=1; render(); });
-  if (freeShipEl) freeShipEl.addEventListener('change', (e)=>{ onlyFree = !!e.target.checked; page=1; render(); });
-  if (pageSizeSelect) pageSizeSelect.addEventListener('change', (e)=>{ 
-    pageSize = Math.max(1, Number(e.target.value)||12); 
-    localStorage.setItem('clockstore_page_size', String(pageSize));
-    page = 1; 
-    render(); 
-  });
-  if (heroSearchForm) heroSearchForm.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    const q = (heroSearchInput?.value||'').trim().toLowerCase();
-    if (searchInput) searchInput.value = q;
-    query = q;
-    page = 1;
-    render();
-    smoothScrollToId('catalogo');
-  });
-  if (heroCta){
-    heroCta.querySelectorAll('a[href^="#"]').forEach((a)=>{
-      a.addEventListener('click', (ev)=>{
-        const href = a.getAttribute('href') || '';
-        if (href.startsWith('#')){
-          ev.preventDefault();
-          smoothScrollToId(href.slice(1));
-        }
-      });
-    });
-  }
-  // Smooth scroll for any direct #catalogo links on the page (e.g., nav/banners)
-  document.querySelectorAll('a[href="#catalogo"]').forEach((a)=>{
-    a.addEventListener('click', (ev)=>{ ev.preventDefault(); smoothScrollToId('catalogo'); });
-  });
+  attachCatalogListeners();
 
   render();
 }
@@ -726,15 +749,13 @@ function initHeroCarousel(){
   if (btnNext) btnNext.addEventListener('click', ()=> go(index+1));
   // Autoplay com respeito a prefers-reduced-motion
   const mql = window.matchMedia?.('(prefers-reduced-motion: reduce)');
-  let autoplay = !(mql && mql.matches);
+  let autoplay = !(mql?.matches);
   let timer = null;
   const start = ()=>{ if (autoplay && !timer) timer = setInterval(()=> go(index+1), 5000); };
   const stop = ()=>{ if (timer){ clearInterval(timer); timer = null; } };
   root.addEventListener('mouseenter', stop);
   root.addEventListener('mouseleave', start);
-  if (mql && typeof mql.addEventListener === 'function'){
-    mql.addEventListener('change', (e)=>{ autoplay = !e.matches; if (!autoplay) stop(); else start(); });
-  }
+  mql?.addEventListener?.('change', (e)=>{ autoplay = !e.matches; if (!autoplay) stop(); else start(); });
   start();
   go(0);
 }
